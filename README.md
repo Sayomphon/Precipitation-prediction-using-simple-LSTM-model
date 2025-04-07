@@ -81,6 +81,7 @@ You need to install the following Python libraries (see `requirements.txt`):
 
 ```bash
 pip install -r requirements.txt
+```
 
 ## 📝 License
 
