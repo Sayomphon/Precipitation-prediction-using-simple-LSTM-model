@@ -89,7 +89,8 @@ input_features = ['month_sin', 'month_cos',
                   'Data.Temperature.Avg Temp',
                   'Data.Temperature.Max Temp',
                   'Data.Temperature.Min Temp',
-                  'Data.Wind.Speed']
+                  'Data.Wind.Speed',
+                  'wind_dir_sin', 'wind_dir_cos']
 
 # Define the columns to scale (only continuous numeric features except cyclical ones)
 scaling_cols = ['Data.Temperature.Avg Temp', 'Data.Temperature.Max Temp', 'Data.Temperature.Min Temp', 'Data.Wind.Speed']

@@ -20,6 +20,9 @@ The following features were selected and preprocessed to be used as input for th
 * `Data.Temperature.Max Temp`: Maximum temperature (Scaled).
 * `Data.Temperature.Min Temp`: Minimum temperature (Scaled).
 * `Data.Wind.Speed`: Wind speed (Scaled).
+* `wind_dir_sin`, `wind_dir_cos`: Cyclical encoding of wind direction.
+
+*(Note: Cyclical features like month and wind direction sin/cos are generally not scaled as they are already within a limited range [-1, 1].)*
 
 **Target Variable:**
 
@@ -32,8 +35,7 @@ The following features were selected and preprocessed to be used as input for th
 3.  **Preprocessing:**
     * Select relevant columns.
     * Split data into Train/Validation (2016) and Test (2017) sets.
-    * Perform cyclical encoding for `Date.Month`.
-    * Process `Data.Wind.Direction` (convert to numeric, cyclical encoding - *though not used as a final input feature in the provided code snippet*).
+    * Perform cyclical encoding for `Date.Month` and `Data.Wind.Direction` (converting direction to numeric first).
     * Scale numerical features (temperature, wind speed) and the target variable (`Data.Precipitation`) using `StandardScaler` (fit only on training data).
 4.  **Data Generation:** Create time series sequences using `keras.preprocessing.timeseries_dataset_from_array` with a sequence length of 14 days (`n_steps`).
 5.  **Define Model:** Build simple LSTM models with varying numbers of units (16, 32, 64, 128).
@@ -49,7 +51,7 @@ The following features were selected and preprocessed to be used as input for th
 
 A simple LSTM architecture was used, consisting of:
 
-1.  **Input Layer:** Expects sequences of shape `(14, 6)` (14 time steps, 6 features).
+1.  **Input Layer:** Expects sequences of shape `(14, 8)` (14 time steps, 8 features: month_sin, month_cos, avg_temp, max_temp, min_temp, wind_speed, wind_dir_sin, wind_dir_cos).
 2.  **LSTM Layer:** An LSTM layer with a varying number of units (16, 32, 64, or 128).
 3.  **Dense Layer:** A single output unit for predicting the precipitation value.
 
@@ -58,15 +60,19 @@ A simple LSTM architecture was used, consisting of:
 The performance of the LSTM models with different numbers of units was evaluated on the test set (data from 2017). Key metrics (MSE, MAE, R²) were calculated for each model configuration (refer to the notebook or script output for detailed results).
 
 **Training & Validation Loss Plot:**
+*(The code generates a plot showing the loss on the training and validation sets for each epoch for the different LSTM sizes. Please refer to the notebook output.)*
+*Example placeholder if you generate the image:*
+[image]https://github.com/Sayomphon/Precipitation-prediction-using-simple-LSTM-model/blob/main/Pictures/Validation%20and%20training%20loss.png
 
-*(This graph shows the loss on the training and validation sets for each epoch for the different LSTM sizes.)*
 
 **True vs. Predicted Precipitation Plot (Test Set):**
 *(The code generates plots comparing the actual precipitation values (True) against the values predicted by the model (Predicted) for each LSTM configuration (16, 32, 64, 128) on the test set. Please refer to the notebook output for these plots.)*
+*Example placeholder if you generate the image:*
+[image](https://github.com/Sayomphon/Precipitation-prediction-using-simple-LSTM-model/blob/main/Pictures/Prediction%20and%20True.png)
 
 ## Requirements
 
-You need to install the following Python libraries:
+You need to install the following Python libraries (see `requirements.txt`):
 
 ```bash
-pip install pandas numpy tensorflow matplotlib scikit-learn
+pip install -r requirements.txt
