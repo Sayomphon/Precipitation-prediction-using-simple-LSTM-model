@@ -59,9 +59,21 @@ A simple LSTM architecture was used, consisting of:
 
 ## 📈 Results
 
+The performance of the LSTM models with different numbers of units was evaluated on the test set (data from 2017). Key metrics calculated are summarized below:
+
+| Model (LSTM Units) | MSE      | MAE      | R²       |
+|--------------------|----------|----------|----------|
+| 16                 | 0.4550   | 0.4870   | -0.0919  |
+| 32                 | 0.5016   | 0.5275   | -0.2038  |
+| 64                 | 0.5090   | 0.5337   | -0.2217  |
+| 128                | 0.5210   | 0.5454   | -0.2504  |
+
+*Note: The Mean Squared Error (MSE) and Mean Absolute Error (MAE) indicate the average error magnitude. The negative R-squared (R²) values suggest that these models, with the current configuration and features on the 2017 test set, perform worse than a baseline model simply predicting the mean precipitation of the test set. This might indicate the need for further feature engineering, model tuning, or considering different model architectures.*
+
 The performance of the LSTM models with different numbers of units was evaluated on the test set (data from 2017). Key metrics (MSE, MAE, R²) were calculated for each model configuration (refer to the notebook or script output for detailed results).
 
 **Training & Validation Loss Plot:**
+
 *(The code generates a plot showing the loss on the training and validation sets for each epoch for the different LSTM sizes. Please refer to the notebook output.)*
 
 <p align="center">
@@ -69,20 +81,50 @@ The performance of the LSTM models with different numbers of units was evaluated
 </p>
 
 **True vs. Predicted Precipitation Plot (Test Set):**
+
 *(The code generates plots comparing the actual precipitation values (True) against the values predicted by the model (Predicted) for each LSTM configuration (16, 32, 64, 128) on the test set. Please refer to the notebook output for these plots.)*
 
 <p align="center">
   <img src="https://github.com/Sayomphon/Precipitation-prediction-using-simple-LSTM-model/blob/main/Pictures/Prediction%20and%20True.png?raw=true" alt="Graph of Prediction and True precipitation data">
 </p>
 
-## 💻 Requirements
+## 🚀 Installation & Setup
+
+1. **Clone this repository:**
+```bash
+git clone https://github.com/Sayomphon/Precipitation-prediction-using-simple-LSTM-model.git
+cd Precipitation-prediction-using-simple-LSTM-model
+```
+
+2. **Install required libraries:**
 
 You need to install the following Python libraries (see `requirements.txt`):
 
 ```bash
 pip install -r requirements.txt
 ```
+3. **Prepare your dataset (data.csv) and place it in the project directory.**
+
+🛠️ Usage
+Run the Jupyter Notebook Precipitation_prediction_using_simple_LSTM.ipynb to train and evaluate the models:
+
+```bash
+jupyter notebook Precipitation_prediction_using_simple_LSTM.ipynb
+```
+
+## 🚧 Future Work
+
+**Possible enhancements include:**
+
+* Experimenting with deeper or more complex neural networks.
+* Incorporating additional features like humidity, atmospheric pressure, or geographic location.
+* Hyperparameter tuning using Keras Tuner or Optuna.
+* Comparing performance with other forecasting models.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
 
 ## 📝 License
 
-Released under the  Apache License. See [LICENSE](https://github.com/Sayomphon/Precipitation-prediction-using-simple-LSTM-model?tab=MIT-1-ov-file).
+Released under the MIT License. See [LICENSE](https://github.com/Sayomphon/Precipitation-prediction-using-simple-LSTM-model?tab=MIT-1-ov-file).
